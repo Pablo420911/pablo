@@ -1,2 +1,2 @@
 # pablo
-Pablo The Autistic but somewhat complete ai 
+Pablo The  somewhat complete ai 
