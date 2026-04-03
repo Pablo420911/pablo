@@ -1,0 +1,93 @@
+{
+  "__comment": [
+    "plny_tengu_crate.json — 3-D decorative crate model.",
+    "Designed to look like a small treasure chest in-hand / inventory.",
+    "Texture: custom/plny_tengu_set/plny_tengu_crate.png",
+    "Suggested layout for the 16×16 texture atlas:",
+    "  [0,0  – 14,10] = body sides",
+    "  [0,10 – 14,14] = lid sides",
+    "  [14,0 – 16,4]  = lock plate"
+  ],
+  "textures": {
+    "crate":    "custom/plny_tengu_set/plny_tengu_crate",
+    "particle": "custom/plny_tengu_set/plny_tengu_crate"
+  },
+  "elements": [
+    {
+      "name": "crate_body",
+      "from": [1, 0, 1],
+      "to":   [15, 10, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 14, 10], "texture": "#crate"},
+        "south": {"uv": [0, 0, 14, 10], "texture": "#crate"},
+        "east":  {"uv": [0, 0, 14, 10], "texture": "#crate"},
+        "west":  {"uv": [0, 0, 14, 10], "texture": "#crate"},
+        "up":    {"uv": [0, 0, 14, 14], "texture": "#crate"},
+        "down":  {"uv": [0, 0, 14, 14], "texture": "#crate", "cullface": "down"}
+      }
+    },
+    {
+      "name": "crate_lid",
+      "from": [1, 10, 1],
+      "to":   [15, 14, 15],
+      "faces": {
+        "north": {"uv": [0, 10, 14, 14], "texture": "#crate"},
+        "south": {"uv": [0, 10, 14, 14], "texture": "#crate"},
+        "east":  {"uv": [0, 10, 14, 14], "texture": "#crate"},
+        "west":  {"uv": [0, 10, 14, 14], "texture": "#crate"},
+        "up":    {"uv": [0, 10, 14, 14], "texture": "#crate"},
+        "down":  {"uv": [0, 10, 14, 14], "texture": "#crate"}
+      }
+    },
+    {
+      "name": "lock",
+      "from": [6, 9, 0],
+      "to":   [10, 12, 1],
+      "faces": {
+        "north": {"uv": [14, 0, 16, 4], "texture": "#crate"},
+        "south": {"uv": [14, 0, 16, 4], "texture": "#crate"},
+        "east":  {"uv": [14, 0, 15, 4], "texture": "#crate"},
+        "west":  {"uv": [14, 0, 15, 4], "texture": "#crate"},
+        "up":    {"uv": [14, 0, 16, 1], "texture": "#crate"},
+        "down":  {"uv": [14, 0, 16, 1], "texture": "#crate"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation":    [10, 0, 0],
+      "translation": [0, 3, 1],
+      "scale":       [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation":    [10, 0, 0],
+      "translation": [0, 3, 1],
+      "scale":       [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation":    [0, 45, 0],
+      "translation": [0, 3, 2],
+      "scale":       [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation":    [0, -45, 0],
+      "translation": [0, 3, 2],
+      "scale":       [0.4, 0.4, 0.4]
+    },
+    "gui": {
+      "rotation":    [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale":       [0.625, 0.625, 0.625]
+    },
+    "ground": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 2, 0],
+      "scale":       [0.25, 0.25, 0.25]
+    },
+    "fixed": {
+      "rotation":    [0, 90, 0],
+      "translation": [-2, 0, -2],
+      "scale":       [0.5, 0.5, 0.5]
+    }
+  }
+}

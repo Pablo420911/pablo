@@ -1,0 +1,6 @@
+{
+  "parent": "item/fishing_rod",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_fishing_rod_cast"
+  }
+}

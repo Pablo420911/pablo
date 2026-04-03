@@ -1,0 +1,19 @@
+{
+  "__comment": [
+    "Shield model — CMD 10005.",
+    "parent 'item/shield' gives correct hand transform and blocking.",
+    "The shield base uses layer0 for the front pattern.",
+    "The 'blocking' predicate switches to plny_tengu_shield_blocking",
+    "which you can make identical or slightly different.",
+    "Texture needed:",
+    "  plny_tengu_shield.png   — shield front artwork",
+    "  plny_tengu_shield_blocking.png  (optional, may reuse the same)"
+  ],
+  "parent": "item/shield",
+  "textures": {
+    "particle": "custom/plny_tengu_set/plny_tengu_shield"
+  },
+  "overrides": [
+    {"predicate": {"blocking": 1}, "model": "custom/plny_tengu_shield_blocking"}
+  ]
+}

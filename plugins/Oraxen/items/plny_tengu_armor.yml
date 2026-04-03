@@ -1,0 +1,150 @@
+# ============================================================
+#  Plny Tengu Armor Set  –  Oraxen item definitions
+#  Naming prefix : plny_tengu_*
+#  CMD range     : 10001 – 10005  (armor + shield)
+#  Base materials: NETHERITE_* for stats; SHIELD for shield
+#
+#  HOW TO USE
+#  ----------
+#  1. Drop your textures into:
+#       plugins/Oraxen/pack/textures/custom/plny_tengu_set/
+#     using the exact filenames referenced in the JSON models.
+#  2. Drop the JSON models into:
+#       plugins/Oraxen/pack/models/custom/
+#  3. Restart the server (or use /oraxen reload).
+#
+#  ATTRIBUTE NOTE
+#  --------------
+#  NETHERITE_* base materials already carry vanilla netherite
+#  stats (helmet 3/3, chest 8/3, legs 6/3, boots 3/3 armor/toughness).
+#  The AttributeModifiers below ADD on top of those values so
+#  the set is stronger than standard netherite.
+#  Remove or adjust them if you want vanilla netherite stats.
+# ============================================================
+
+# ------------------------------------------------------------------
+# HELMET  (CMD 10001)
+# Merged helmet + wings model.  Wings appear on the player's back
+# because the wing elements are placed at high-Z in the model
+# (Z ≥ 13), which corresponds to the back of the player when worn.
+# ------------------------------------------------------------------
+plny_tengu_helmet:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Helm</gradient>"
+  material: NETHERITE_HELMET
+  custom_model_data: 10001
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_helmet
+  lore:
+    - "<gray>Forged in the fires of the demon forge,"
+    - "<gray>adorned with the wings of fallen tengu."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ ARMOR: 5   TOUGHNESS: 4"
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 2
+      operation: ADD_NUMBER
+      slot: HEAD
+      uuid: "e1c10c5e-0000-0001-0001-000000000001"
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 1
+      operation: ADD_NUMBER
+      slot: HEAD
+      uuid: "e1c10c5e-0000-0001-0001-000000000002"
+
+# ------------------------------------------------------------------
+# CHESTPLATE  (CMD 10002)
+# ------------------------------------------------------------------
+plny_tengu_chestplate:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Plate</gradient>"
+  material: NETHERITE_CHESTPLATE
+  custom_model_data: 10002
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_chestplate
+  lore:
+    - "<gray>Hardened scales of an ancient tengu lord."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ ARMOR: 10   TOUGHNESS: 4"
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 2
+      operation: ADD_NUMBER
+      slot: CHEST
+      uuid: "e1c10c5e-0000-0001-0002-000000000001"
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 1
+      operation: ADD_NUMBER
+      slot: CHEST
+      uuid: "e1c10c5e-0000-0001-0002-000000000002"
+
+# ------------------------------------------------------------------
+# LEGGINGS  (CMD 10003)
+# ------------------------------------------------------------------
+plny_tengu_leggings:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Greaves</gradient>"
+  material: NETHERITE_LEGGINGS
+  custom_model_data: 10003
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_leggings
+  lore:
+    - "<gray>Woven from shadow-steel, light as a feather."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ ARMOR: 8   TOUGHNESS: 4"
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 2
+      operation: ADD_NUMBER
+      slot: LEGS
+      uuid: "e1c10c5e-0000-0001-0003-000000000001"
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 1
+      operation: ADD_NUMBER
+      slot: LEGS
+      uuid: "e1c10c5e-0000-0001-0003-000000000002"
+
+# ------------------------------------------------------------------
+# BOOTS  (CMD 10004)
+# ------------------------------------------------------------------
+plny_tengu_boots:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Treads</gradient>"
+  material: NETHERITE_BOOTS
+  custom_model_data: 10004
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_boots
+  lore:
+    - "<gray>Silent as death, swift as the wind."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ ARMOR: 5   TOUGHNESS: 4"
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 2
+      operation: ADD_NUMBER
+      slot: FEET
+      uuid: "e1c10c5e-0000-0001-0004-000000000001"
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 1
+      operation: ADD_NUMBER
+      slot: FEET
+      uuid: "e1c10c5e-0000-0001-0004-000000000002"
+
+# ------------------------------------------------------------------
+# SHIELD  (CMD 10005)
+# ------------------------------------------------------------------
+plny_tengu_shield:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Shield</gradient>"
+  material: SHIELD
+  custom_model_data: 10005
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_shield
+  lore:
+    - "<gray>Bears the sigil of the tengu clan."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"

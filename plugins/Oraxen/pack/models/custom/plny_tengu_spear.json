@@ -1,0 +1,7 @@
+{
+  "__comment": "Spear model — long weapon, item/handheld gives the diagonal in-hand position.",
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_spear"
+  }
+}

@@ -1,0 +1,207 @@
+# ============================================================
+#  Plny Tengu Tool Set  –  Oraxen item definitions
+#  Naming prefix : plny_tengu_*
+#  CMD range     : 10006 – 10016
+#
+#  Base material choices explained:
+#    NETHERITE_SWORD / AXE / PICKAXE / SHOVEL / HOE
+#      → inherits netherite damage/speed and enchantability
+#    BOW / CROSSBOW / FISHING_ROD / TRIDENT
+#      → vanilla ranged/fishing base with custom model
+#    BLAZE_ROD (staff), IRON_SWORD (spear)
+#      → neutral materials with custom model + attributes
+# ============================================================
+
+# ------------------------------------------------------------------
+# SWORD  (CMD 10006)
+# ------------------------------------------------------------------
+plny_tengu_sword:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Blade</gradient>"
+  material: NETHERITE_SWORD
+  custom_model_data: 10006
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_sword
+  lore:
+    - "<gray>Drinks the blood of enemies."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ DAMAGE: +8"
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 1
+      operation: ADD_NUMBER
+      slot: MAINHAND
+      uuid: "e1c10c5e-0000-0002-0001-000000000001"
+
+# ------------------------------------------------------------------
+# BOW  (CMD 10007)
+# The bow model file contains its own pull-state overrides:
+#   plny_tengu_bow_pulling_0 / _1 / _2
+# ------------------------------------------------------------------
+plny_tengu_bow:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Bow</gradient>"
+  material: BOW
+  custom_model_data: 10007
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_bow
+  lore:
+    - "<gray>Strung with the sinew of a great beast."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# CROSSBOW  (CMD 10008)
+# The crossbow model file contains pull / charged / firework
+# sub-state overrides.
+# ------------------------------------------------------------------
+plny_tengu_crossbow:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Crossbow</gradient>"
+  material: CROSSBOW
+  custom_model_data: 10008
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_crossbow
+  lore:
+    - "<gray>Bolts the darkness itself."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# FISHING ROD  (CMD 10009)
+# The fishing_rod model file contains a cast-state override.
+# ------------------------------------------------------------------
+plny_tengu_fishing_rod:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Spirit Rod</gradient>"
+  material: FISHING_ROD
+  custom_model_data: 10009
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_fishing_rod
+  lore:
+    - "<gray>Fishes from the void itself."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# STAFF  (CMD 10010)
+# Using BLAZE_ROD so it holds like a staff in hand.
+# No attack damage override – treat it as a cosmetic weapon.
+# Add a Mechanics section if your Oraxen version supports spells.
+# ------------------------------------------------------------------
+plny_tengu_staff:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Spirit Staff</gradient>"
+  material: BLAZE_ROD
+  custom_model_data: 10010
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_staff
+  lore:
+    - "<gray>Channels the energy of the spirit world."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# SPEAR  (CMD 10011)
+# Using IRON_SWORD as neutral base; full stats added below.
+# ------------------------------------------------------------------
+plny_tengu_spear:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Spear</gradient>"
+  material: IRON_SWORD
+  custom_model_data: 10011
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_spear
+  lore:
+    - "<gray>A spear made for piercing demon hide."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ DAMAGE: +7"
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 7
+      operation: ADD_NUMBER
+      slot: MAINHAND
+      uuid: "e1c10c5e-0000-0002-0006-000000000001"
+    - attribute: GENERIC_ATTACK_SPEED
+      amount: -2.8
+      operation: ADD_NUMBER
+      slot: MAINHAND
+      uuid: "e1c10c5e-0000-0002-0006-000000000002"
+
+# ------------------------------------------------------------------
+# TRIDENT  (CMD 10012)
+# ------------------------------------------------------------------
+plny_tengu_trident:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Sea Lance</gradient>"
+  material: TRIDENT
+  custom_model_data: 10012
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_trident
+  lore:
+    - "<gray>Hurled with the fury of a storm god."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# AXE  (CMD 10013)
+# ------------------------------------------------------------------
+plny_tengu_axe:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Axe</gradient>"
+  material: NETHERITE_AXE
+  custom_model_data: 10013
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_axe
+  lore:
+    - "<gray>Cleaves armour and tree alike."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+    - "<dark_red>◈ DAMAGE: +10"
+
+# ------------------------------------------------------------------
+# SHOVEL  (CMD 10014)
+# ------------------------------------------------------------------
+plny_tengu_shovel:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Shovel</gradient>"
+  material: NETHERITE_SHOVEL
+  custom_model_data: 10014
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_shovel
+  lore:
+    - "<gray>Digs graves faster than it digs dirt."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# PICKAXE  (CMD 10015)
+# ------------------------------------------------------------------
+plny_tengu_pickaxe:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Pick</gradient>"
+  material: NETHERITE_PICKAXE
+  custom_model_data: 10015
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_pickaxe
+  lore:
+    - "<gray>Mines the deepest obsidian veins."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
+
+# ------------------------------------------------------------------
+# HOE  (CMD 10016)
+# ------------------------------------------------------------------
+plny_tengu_hoe:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu War Hoe</gradient>"
+  material: NETHERITE_HOE
+  custom_model_data: 10016
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_hoe
+  lore:
+    - "<gray>Cultivates both soil and suffering."
+    - ""
+    - "<dark_red>⚔ SET: Plny Tengu"
