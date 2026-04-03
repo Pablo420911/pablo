@@ -66,6 +66,7 @@ public:
     std::string setThermostatMode(const std::string& mode);
     std::string getThermostatStatus() const;
     std::string setTemperatureUnit(const std::string& unit);
+    double      getSetpoint() const;  // current target temperature in °C
 
     // ---- Locks ----
     std::string controlLock(const std::string& door, bool lock);

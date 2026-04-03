@@ -124,7 +124,7 @@ std::string Pablo::checkCustomResponses(const std::string& input) {
     return learner_.findCustomResponse(input);
 }
 
-// ---- Bulitin factual answers -----------------------------------------------
+// ---- Builtin factual answers -----------------------------------------------
 
 std::string Pablo::builtinAnswer(const ParsedInput& p) const {
     auto& t = p.tokens;
@@ -339,11 +339,10 @@ std::string Pablo::handleCommand(const ParsedInput& p) {
             catch (...) {}
         }
         if (containsAny({"increase", "raise", "higher", "warmer"})) {
-            return home_.setTemperature(
-                [&]{ double cur; return (cur = 21.0) + 2.0; }());
+            return home_.setTemperature(home_.getSetpoint() + 2.0);
         }
         if (containsAny({"decrease", "lower", "cooler"})) {
-            return home_.setTemperature(19.0);
+            return home_.setTemperature(home_.getSetpoint() - 2.0);
         }
         return home_.getThermostatStatus();
     }

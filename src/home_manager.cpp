@@ -205,6 +205,10 @@ std::string HomeManager::setTemperatureUnit(const std::string& unit) {
     return "Unknown unit \"" + unit + "\". Use C or F.";
 }
 
+double HomeManager::getSetpoint() const {
+    return thermostat_.setpoint;
+}
+
 // ---- Locks ------------------------------------------------------------------
 
 std::string HomeManager::controlLock(const std::string& door, bool lock) {
