@@ -1,0 +1,280 @@
+{
+  "credit": "plny_tengu_set — Polagony Tengu Helmet + Wings (3D elements model)",
+  "ambientocclusion": true,
+  "textures": {
+    "helmet": "custom/plny_tengu_set/plny_tengu_helmet",
+    "wings":  "custom/plny_tengu_set/plny_tengu_wings",
+    "particle": "custom/plny_tengu_set/plny_tengu_helmet"
+  },
+
+  "elements": [
+
+    {
+      "__name": "Skull dome",
+      "from": [1, 8, 1],
+      "to":   [15, 14, 15],
+      "faces": {
+        "north": {"uv": [8,  8, 22, 14], "texture": "#helmet"},
+        "south": {"uv": [22, 8, 36, 14], "texture": "#helmet"},
+        "east":  {"uv": [0,  8,  8, 14], "texture": "#helmet"},
+        "west":  {"uv": [36, 8, 44, 14], "texture": "#helmet"},
+        "up":    {"uv": [8,  0, 22,  8], "texture": "#helmet"},
+        "down":  {"uv": [22, 0, 36,  8], "texture": "#helmet", "cullface": "down"}
+      }
+    },
+
+    {
+      "__name": "Brim front",
+      "from": [0, 5, -1],
+      "to":   [16, 7, 2],
+      "faces": {
+        "north": {"uv": [0, 14, 16, 16], "texture": "#helmet"},
+        "south": {"uv": [0, 16, 16, 18], "texture": "#helmet"},
+        "east":  {"uv": [44, 8, 47, 14], "texture": "#helmet"},
+        "west":  {"uv": [44, 8, 47, 14], "texture": "#helmet"},
+        "up":    {"uv": [0, 18, 16, 21], "texture": "#helmet"},
+        "down":  {"uv": [16, 18, 32, 21], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Brim back",
+      "from": [0, 5, 14],
+      "to":   [16, 7, 17],
+      "faces": {
+        "north": {"uv": [0, 21, 16, 23], "texture": "#helmet"},
+        "south": {"uv": [0, 23, 16, 25], "texture": "#helmet"},
+        "east":  {"uv": [44, 14, 47, 16], "texture": "#helmet"},
+        "west":  {"uv": [44, 14, 47, 16], "texture": "#helmet"},
+        "up":    {"uv": [0, 25, 16, 28], "texture": "#helmet"},
+        "down":  {"uv": [16, 25, 32, 28], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Brim left",
+      "from": [-1, 5, 2],
+      "to":   [1, 7, 14],
+      "faces": {
+        "north": {"uv": [32, 14, 34, 16], "texture": "#helmet"},
+        "south": {"uv": [34, 14, 36, 16], "texture": "#helmet"},
+        "east":  {"uv": [36, 14, 48, 16], "texture": "#helmet"},
+        "west":  {"uv": [36, 16, 48, 18], "texture": "#helmet"},
+        "up":    {"uv": [36, 18, 48, 20], "texture": "#helmet"},
+        "down":  {"uv": [36, 20, 48, 22], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Brim right",
+      "from": [15, 5, 2],
+      "to":   [17, 7, 14],
+      "faces": {
+        "north": {"uv": [48, 14, 50, 16], "texture": "#helmet"},
+        "south": {"uv": [50, 14, 52, 16], "texture": "#helmet"},
+        "east":  {"uv": [48, 16, 60, 18], "texture": "#helmet"},
+        "west":  {"uv": [48, 18, 60, 20], "texture": "#helmet"},
+        "up":    {"uv": [48, 20, 60, 22], "texture": "#helmet"},
+        "down":  {"uv": [48, 22, 60, 24], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Face plate (Tengu mask)",
+      "from": [2, 3, -3],
+      "to":   [14, 8, 1],
+      "faces": {
+        "north": {"uv": [0, 28, 12, 33], "texture": "#helmet"},
+        "south": {"uv": [12, 28, 24, 33], "texture": "#helmet"},
+        "east":  {"uv": [24, 28, 28, 33], "texture": "#helmet"},
+        "west":  {"uv": [28, 28, 32, 33], "texture": "#helmet"},
+        "up":    {"uv": [0, 33, 12, 37], "texture": "#helmet"},
+        "down":  {"uv": [12, 33, 24, 37], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Tengu beak / nose",
+      "from": [6, 4, -6],
+      "to":   [10, 6, -2],
+      "faces": {
+        "north": {"uv": [0, 37, 4, 39], "texture": "#helmet"},
+        "south": {"uv": [4, 37, 8, 39], "texture": "#helmet"},
+        "east":  {"uv": [8, 37, 12, 39], "texture": "#helmet"},
+        "west":  {"uv": [12, 37, 16, 39], "texture": "#helmet"},
+        "up":    {"uv": [0, 39, 4, 43], "texture": "#helmet"},
+        "down":  {"uv": [4, 39, 8, 43], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Left horn",
+      "from": [1, 13, 5],
+      "to":   [4, 18, 8],
+      "faces": {
+        "north": {"uv": [0, 43, 3, 48], "texture": "#helmet"},
+        "south": {"uv": [3, 43, 6, 48], "texture": "#helmet"},
+        "east":  {"uv": [6, 43, 9, 48], "texture": "#helmet"},
+        "west":  {"uv": [9, 43, 12, 48], "texture": "#helmet"},
+        "up":    {"uv": [0, 48, 3, 51], "texture": "#helmet"},
+        "down":  {"uv": [3, 48, 6, 51], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Right horn",
+      "from": [12, 13, 5],
+      "to":   [15, 18, 8],
+      "faces": {
+        "north": {"uv": [12, 43, 15, 48], "texture": "#helmet"},
+        "south": {"uv": [15, 43, 18, 48], "texture": "#helmet"},
+        "east":  {"uv": [18, 43, 21, 48], "texture": "#helmet"},
+        "west":  {"uv": [21, 43, 24, 48], "texture": "#helmet"},
+        "up":    {"uv": [12, 48, 15, 51], "texture": "#helmet"},
+        "down":  {"uv": [15, 48, 18, 51], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "__name": "Wing spine — connector on back of helmet",
+      "from": [6, 0, 13],
+      "to":   [10, 8, 18],
+      "faces": {
+        "north": {"uv": [0,  0,  4,  8], "texture": "#wings"},
+        "south": {"uv": [4,  0,  8,  8], "texture": "#wings"},
+        "east":  {"uv": [8,  0, 13,  8], "texture": "#wings"},
+        "west":  {"uv": [13, 0, 18,  8], "texture": "#wings"},
+        "up":    {"uv": [0,  8,  4, 13], "texture": "#wings"},
+        "down":  {"uv": [4,  8,  8, 13], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Left wing — upper panel",
+      "from": [-8, 2, 14],
+      "to":   [8,  8, 17],
+      "faces": {
+        "north": {"uv": [0, 13, 16, 19], "texture": "#wings"},
+        "south": {"uv": [0, 19, 16, 25], "texture": "#wings"},
+        "east":  {"uv": [16, 13, 19, 19], "texture": "#wings"},
+        "west":  {"uv": [19, 13, 22, 19], "texture": "#wings"},
+        "up":    {"uv": [0, 25, 16, 28], "texture": "#wings"},
+        "down":  {"uv": [0, 28, 16, 31], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Left wing — lower panel",
+      "from": [-14, -6, 14],
+      "to":   [6,   2,  17],
+      "faces": {
+        "north": {"uv": [0, 31, 20, 39], "texture": "#wings"},
+        "south": {"uv": [0, 39, 20, 47], "texture": "#wings"},
+        "east":  {"uv": [20, 31, 23, 39], "texture": "#wings"},
+        "west":  {"uv": [20, 39, 23, 47], "texture": "#wings"},
+        "up":    {"uv": [0, 47, 20, 50], "texture": "#wings"},
+        "down":  {"uv": [0, 50, 20, 53], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Left wing — tip feather",
+      "from": [-16, -2, 15],
+      "to":   [-6,   2, 17],
+      "faces": {
+        "north": {"uv": [22, 31, 32, 35], "texture": "#wings"},
+        "south": {"uv": [22, 35, 32, 39], "texture": "#wings"},
+        "east":  {"uv": [32, 31, 34, 35], "texture": "#wings"},
+        "west":  {"uv": [34, 31, 36, 35], "texture": "#wings"},
+        "up":    {"uv": [22, 39, 32, 41], "texture": "#wings"},
+        "down":  {"uv": [22, 41, 32, 43], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Right wing — upper panel",
+      "from": [8,  2, 14],
+      "to":   [24, 8, 17],
+      "faces": {
+        "north": {"uv": [32, 13, 48, 19], "texture": "#wings"},
+        "south": {"uv": [32, 19, 48, 25], "texture": "#wings"},
+        "east":  {"uv": [48, 13, 51, 19], "texture": "#wings"},
+        "west":  {"uv": [51, 13, 54, 19], "texture": "#wings"},
+        "up":    {"uv": [32, 25, 48, 28], "texture": "#wings"},
+        "down":  {"uv": [32, 28, 48, 31], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Right wing — lower panel",
+      "from": [10,  -6, 14],
+      "to":   [30,   2, 17],
+      "faces": {
+        "north": {"uv": [32, 31, 52, 39], "texture": "#wings"},
+        "south": {"uv": [32, 39, 52, 47], "texture": "#wings"},
+        "east":  {"uv": [52, 31, 55, 39], "texture": "#wings"},
+        "west":  {"uv": [52, 39, 55, 47], "texture": "#wings"},
+        "up":    {"uv": [32, 47, 52, 50], "texture": "#wings"},
+        "down":  {"uv": [32, 50, 52, 53], "texture": "#wings"}
+      }
+    },
+
+    {
+      "__name": "Right wing — tip feather",
+      "from": [22,  -2, 15],
+      "to":   [32,   2, 17],
+      "faces": {
+        "north": {"uv": [54, 31, 64, 35], "texture": "#wings"},
+        "south": {"uv": [54, 35, 64, 39], "texture": "#wings"},
+        "east":  {"uv": [54, 39, 57, 43], "texture": "#wings"},
+        "west":  {"uv": [57, 39, 60, 43], "texture": "#wings"},
+        "up":    {"uv": [54, 43, 64, 45], "texture": "#wings"},
+        "down":  {"uv": [54, 45, 64, 47], "texture": "#wings"}
+      }
+    }
+
+  ],
+
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, -90, 25],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 90, -25],
+      "translation": [-1.13, 3.2, 1.13],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 2, 0],
+      "scale": [0.35, 0.35, 0.35]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "fixed": {
+      "rotation": [0, 90, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "head": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }
+  }
+}

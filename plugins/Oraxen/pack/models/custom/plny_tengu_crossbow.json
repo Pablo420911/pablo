@@ -1,0 +1,13 @@
+{
+  "parent": "item/crossbow",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_crossbow"
+  },
+  "overrides": [
+    {"predicate": {"pulling": 1, "pull": 0.0},  "model": "custom/plny_tengu_crossbow"},
+    {"predicate": {"pulling": 1, "pull": 0.58}, "model": "custom/plny_tengu_crossbow"},
+    {"predicate": {"pulling": 1, "pull": 1.0},  "model": "custom/plny_tengu_crossbow"},
+    {"predicate": {"charged": 1},               "model": "custom/plny_tengu_crossbow_arrow"},
+    {"predicate": {"charged": 1, "firework": 1},"model": "custom/plny_tengu_crossbow_firework"}
+  ]
+}

@@ -1,0 +1,290 @@
+# =============================================================================
+# plny_tengu_tools.yml
+# Polagony Tengu Tools & Weapons — Oraxen Item Definitions
+# Naming convention: plny_tengu_*
+# Compatible with Oraxen 1.x / 2.x on Paper/Spigot 1.18–1.21+
+# =============================================================================
+# NOTES
+#  • All weapons use NETHERITE_* base materials for max durability and stats.
+#  • Staff and Spear use NETHERITE_HOE / NETHERITE_SWORD as base (visual-only
+#    replacements). Adjust material to taste.
+#  • Bow pulling models are referenced via vanilla override predicates inside
+#    plny_tengu_bow.json — no extra Oraxen mechanic needed.
+#  • AttributeModifiers use Bukkit enum names. Oraxen maps them automatically.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# SWORD
+# ---------------------------------------------------------------------------
+plny_tengu_sword:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Blade</gradient>"
+  material: NETHERITE_SWORD
+  lore:
+    - "<dark_gray>A blade honed on the bones of fallen demons."
+    - ""
+    - "<gold>⚔ Attack Damage: <yellow>+12"
+    - "<gold>⚡ Attack Speed: <yellow>+1.6"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_sword
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 12.0
+      operation: ADD_NUMBER
+      slot: MAINHAND
+    - attribute: GENERIC_ATTACK_SPEED
+      amount: 1.6
+      operation: ADD_NUMBER
+      slot: MAINHAND
+
+# ---------------------------------------------------------------------------
+# BOW
+# ---------------------------------------------------------------------------
+plny_tengu_bow:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu War Bow</gradient>"
+  material: BOW
+  lore:
+    - "<dark_gray>Draws the wind itself as its string."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_bow
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# CROSSBOW
+# ---------------------------------------------------------------------------
+plny_tengu_crossbow:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Crossbow</gradient>"
+  material: CROSSBOW
+  lore:
+    - "<dark_gray>Precision of the demon hunter."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_crossbow
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# SHIELD
+# ---------------------------------------------------------------------------
+plny_tengu_shield:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Ward Shield</gradient>"
+  material: SHIELD
+  lore:
+    - "<dark_gray>Marked with the sigil of protection."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_shield
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# FISHING ROD
+# ---------------------------------------------------------------------------
+plny_tengu_fishing_rod:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Spirit Rod</gradient>"
+  material: FISHING_ROD
+  lore:
+    - "<dark_gray>Catches souls as easily as fish."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_fishing_rod
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# STAFF  (uses NETHERITE_HOE as base for reach + attack)
+# ---------------------------------------------------------------------------
+plny_tengu_staff:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Spirit Staff</gradient>"
+  material: NETHERITE_HOE
+  lore:
+    - "<dark_gray>A conduit for demon-realm energies."
+    - ""
+    - "<gold>⚔ Attack Damage: <yellow>+8"
+    - "<gold>⚡ Attack Speed: <yellow>+1.2"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_staff
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 8.0
+      operation: ADD_NUMBER
+      slot: MAINHAND
+    - attribute: GENERIC_ATTACK_SPEED
+      amount: 1.2
+      operation: ADD_NUMBER
+      slot: MAINHAND
+
+# ---------------------------------------------------------------------------
+# SPEAR  (uses NETHERITE_SWORD as base)
+# ---------------------------------------------------------------------------
+plny_tengu_spear:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Spear</gradient>"
+  material: NETHERITE_SWORD
+  lore:
+    - "<dark_gray>Thrown or thrust — equally lethal."
+    - ""
+    - "<gold>⚔ Attack Damage: <yellow>+10"
+    - "<gold>⚡ Attack Speed: <yellow>+1.4"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_spear
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 10.0
+      operation: ADD_NUMBER
+      slot: MAINHAND
+    - attribute: GENERIC_ATTACK_SPEED
+      amount: 1.4
+      operation: ADD_NUMBER
+      slot: MAINHAND
+
+# ---------------------------------------------------------------------------
+# TRIDENT
+# ---------------------------------------------------------------------------
+plny_tengu_trident:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Tide Trident</gradient>"
+  material: TRIDENT
+  lore:
+    - "<dark_gray>Commands both storm and sea."
+    - ""
+    - "<gold>⚔ Attack Damage: <yellow>+9"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_trident
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 9.0
+      operation: ADD_NUMBER
+      slot: MAINHAND
+
+# ---------------------------------------------------------------------------
+# AXE
+# ---------------------------------------------------------------------------
+plny_tengu_axe:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu War Axe</gradient>"
+  material: NETHERITE_AXE
+  lore:
+    - "<dark_gray>Splits shields and skulls alike."
+    - ""
+    - "<gold>⚔ Attack Damage: <yellow>+11"
+    - "<gold>⚡ Attack Speed: <yellow>+0.9"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_axe
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ATTACK_DAMAGE
+      amount: 11.0
+      operation: ADD_NUMBER
+      slot: MAINHAND
+    - attribute: GENERIC_ATTACK_SPEED
+      amount: 0.9
+      operation: ADD_NUMBER
+      slot: MAINHAND
+
+# ---------------------------------------------------------------------------
+# SHOVEL
+# ---------------------------------------------------------------------------
+plny_tengu_shovel:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Shovel</gradient>"
+  material: NETHERITE_SHOVEL
+  lore:
+    - "<dark_gray>Even the earth yields to Tengu will."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_shovel
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# PICKAXE
+# ---------------------------------------------------------------------------
+plny_tengu_pickaxe:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Pickaxe</gradient>"
+  material: NETHERITE_PICKAXE
+  lore:
+    - "<dark_gray>Mines the bones of the earth with ease."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_pickaxe
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+
+# ---------------------------------------------------------------------------
+# HOE
+# ---------------------------------------------------------------------------
+plny_tengu_hoe:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Harvest Hoe</gradient>"
+  material: NETHERITE_HOE
+  lore:
+    - "<dark_gray>Cultivates life in the harshest soil."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_hoe
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE

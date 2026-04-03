@@ -1,0 +1,187 @@
+# =============================================================================
+# plny_tengu_armor.yml
+# Polagony Tengu Armor Set — Oraxen Item Definitions
+# Naming convention: plny_tengu_*
+# Compatible with Oraxen 1.x / 2.x on Paper/Spigot 1.18–1.21+
+# =============================================================================
+# NOTES
+#  • NETHERITE_* base materials give full netherite protection by default.
+#    Extra attributes below push stats above vanilla netherite.
+#  • AttributeModifiers use Bukkit enum names (GENERIC_ARMOR, etc.).
+#    Oraxen maps these to the Paper 1.20.5+ registry names automatically.
+#  • The helmet model is a full 3D elements-based JSON (with wings).
+#    All other armor pieces use item/generated with custom texture.
+#  • To enable custom WORN visuals for chest/legs/boots add the
+#    Oraxen "Armor" mechanic (see commented section) and supply
+#    plugins/Oraxen/pack/textures/models/armor/plny_tengu_layer_1.png
+#    and plny_tengu_layer_2.png.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# HELMET + WINGS (merged single item, 3D model)
+# ---------------------------------------------------------------------------
+plny_tengu_helmet:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Helm</gradient>"
+  material: NETHERITE_HELMET
+  lore:
+    - "<dark_gray>A fearsome helm worn by the Tengu masters."
+    - "<dark_gray>The twin wings mark one who has surpassed death."
+    - ""
+    - "<gold>⚔ Armor: <yellow>+5"
+    - "<gold>⚔ Toughness: <yellow>+4"
+    - "<gold>❤ Max Health: <yellow>+4"
+    - "<gold>✦ Knockback Resist: <yellow>+20%"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_helmet
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 5.0
+      operation: ADD_NUMBER
+      slot: HEAD
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 4.0
+      operation: ADD_NUMBER
+      slot: HEAD
+    - attribute: GENERIC_MAX_HEALTH
+      amount: 4.0
+      operation: ADD_NUMBER
+      slot: HEAD
+    - attribute: GENERIC_KNOCKBACK_RESISTANCE
+      amount: 0.2
+      operation: ADD_NUMBER
+      slot: HEAD
+  # --- Uncomment to enable custom worn-armor texture (requires armor layer PNGs) ---
+  # Mechanics:
+  #   Armor:
+  #     texture: plny_tengu   # → pack/textures/models/armor/plny_tengu_layer_1.png
+
+# ---------------------------------------------------------------------------
+# CHESTPLATE
+# ---------------------------------------------------------------------------
+plny_tengu_chestplate:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Chestplate</gradient>"
+  material: NETHERITE_CHESTPLATE
+  lore:
+    - "<dark_gray>Forged in the fires of the demon realm."
+    - "<dark_gray>Impenetrable by mortal blades."
+    - ""
+    - "<gold>⚔ Armor: <yellow>+8"
+    - "<gold>⚔ Toughness: <yellow>+4"
+    - "<gold>❤ Max Health: <yellow>+6"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_chestplate
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 8.0
+      operation: ADD_NUMBER
+      slot: CHEST
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 4.0
+      operation: ADD_NUMBER
+      slot: CHEST
+    - attribute: GENERIC_MAX_HEALTH
+      amount: 6.0
+      operation: ADD_NUMBER
+      slot: CHEST
+  # Mechanics:
+  #   Armor:
+  #     texture: plny_tengu
+
+# ---------------------------------------------------------------------------
+# LEGGINGS
+# ---------------------------------------------------------------------------
+plny_tengu_leggings:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Leggings</gradient>"
+  material: NETHERITE_LEGGINGS
+  lore:
+    - "<dark_gray>Swift as the mountain wind."
+    - ""
+    - "<gold>⚔ Armor: <yellow>+6"
+    - "<gold>⚔ Toughness: <yellow>+4"
+    - "<gold>⚡ Movement Speed: <yellow>+5%"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_leggings
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 6.0
+      operation: ADD_NUMBER
+      slot: LEGS
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 4.0
+      operation: ADD_NUMBER
+      slot: LEGS
+    - attribute: GENERIC_MOVEMENT_SPEED
+      amount: 0.05
+      operation: MULTIPLY_SCALAR_1
+      slot: LEGS
+  # Mechanics:
+  #   Armor:
+  #     texture: plny_tengu
+
+# ---------------------------------------------------------------------------
+# BOOTS
+# ---------------------------------------------------------------------------
+plny_tengu_boots:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Boots</gradient>"
+  material: NETHERITE_BOOTS
+  lore:
+    - "<dark_gray>Walk the path between realms unseen."
+    - ""
+    - "<gold>⚔ Armor: <yellow>+3"
+    - "<gold>⚔ Toughness: <yellow>+4"
+    - "<gold>⚡ Movement Speed: <yellow>+10%"
+    - "<gold>✦ Knockback Resist: <yellow>+10%"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_boots
+  Unbreakable: true
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+    - HIDE_UNBREAKABLE
+    - HIDE_ENCHANTS
+  AttributeModifiers:
+    - attribute: GENERIC_ARMOR
+      amount: 3.0
+      operation: ADD_NUMBER
+      slot: FEET
+    - attribute: GENERIC_ARMOR_TOUGHNESS
+      amount: 4.0
+      operation: ADD_NUMBER
+      slot: FEET
+    - attribute: GENERIC_MOVEMENT_SPEED
+      amount: 0.1
+      operation: MULTIPLY_SCALAR_1
+      slot: FEET
+    - attribute: GENERIC_KNOCKBACK_RESISTANCE
+      amount: 0.1
+      operation: ADD_NUMBER
+      slot: FEET
+  # Mechanics:
+  #   Armor:
+  #     texture: plny_tengu

@@ -1,0 +1,27 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_leggings"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, -90, 25],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.68, 0.68, 0.68]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    }
+  }
+}
