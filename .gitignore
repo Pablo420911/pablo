@@ -1,0 +1,17 @@
+# Build artifacts
+build/
+*.o
+*.a
+
+# IDE files
+.vscode/
+.idea/
+*.user
+
+# Compiled binaries
+pablo
+test_*
+
+# Auto-generated knowledge base in data dir (user data)
+# Keep the default data/pablo.kb in source control but not the build copy
+build/
