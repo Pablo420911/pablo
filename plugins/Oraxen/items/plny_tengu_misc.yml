@@ -1,0 +1,52 @@
+# =============================================================================
+# plny_tengu_misc.yml
+# Polagony Tengu Miscellaneous Items — Oraxen Item Definitions
+# Naming convention: plny_tengu_*
+# Compatible with Oraxen 1.x / 2.x on Paper/Spigot 1.18–1.21+
+# =============================================================================
+# NOTES
+#  • Crate uses CHEST as base material. For a crate-opening mechanic, pair
+#    with a crate plugin (e.g. AdvancedCrates, GoldenCrates, CrateReloaded).
+#    In Oraxen, the crate is just a custom visual item. The crate plugin reads
+#    its item NBT / custom_model_data to identify it.
+#  • Key uses TRIPWIRE_HOOK as base (lightweight, stackable, no natural
+#    durability loss). Swap to PAPER if you prefer a truly flat item.
+#  • Both items use item/generated parent in their model JSON (flat 2D sprite
+#    that matches their texture perfectly — ideal for UI/inventory items).
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# CRATE
+# ---------------------------------------------------------------------------
+plny_tengu_crate:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Mystery Crate</gradient>"
+  material: CHEST
+  lore:
+    - "<dark_gray>Contains relics of the Tengu masters."
+    - "<dark_gray>Use a <gold>✦ Tengu Key</gold><dark_gray> to unlock."
+    - ""
+    - "<red>Right-click to open"
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_crate
+  ItemFlags:
+    - HIDE_ATTRIBUTES
+
+# ---------------------------------------------------------------------------
+# KEY
+# ---------------------------------------------------------------------------
+plny_tengu_key:
+  displayname: "<gradient:#8B0000:#FF4500>✦ Tengu Key</gradient>"
+  material: TRIPWIRE_HOOK
+  lore:
+    - "<dark_gray>Forged in demon-fire, it opens"
+    - "<dark_gray>the <gold>✦ Tengu Mystery Crate</gold><dark_gray>."
+    - ""
+    - "<dark_purple><i>✦ Polagony Tengu Set</i>"
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_key
+  ItemFlags:
+    - HIDE_ATTRIBUTES

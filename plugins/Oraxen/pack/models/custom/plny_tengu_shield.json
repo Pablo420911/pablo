@@ -1,0 +1,33 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_shield"
+  },
+  "display": {
+    "gui": {
+      "rotation": [0, 0, -25],
+      "translation": [2, 4, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "thirdperson_righthand": {
+      "rotation": [-90, 0, 55],
+      "translation": [10, 6, -4],
+      "scale": [1, 1, 1]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [-90, 0, -55],
+      "translation": [-10, 6, -4],
+      "scale": [1, 1, 1]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 180, 5],
+      "translation": [-10, 2, -10],
+      "scale": [1.25, 1.25, 1.25]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 180, 5],
+      "translation": [10, 0, -10],
+      "scale": [1.25, 1.25, 1.25]
+    }
+  }
+}
