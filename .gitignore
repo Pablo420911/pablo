@@ -8,9 +8,9 @@ build/
 .idea/
 *.user
 
-# Compiled binaries
-pablo
-test_*
+# Compiled binaries (no extension, Unix executables)
+# Exclude compiled test binaries but NOT test source files (test_*.cpp)
+/pablo
 
 # Auto-generated knowledge base in data dir (user data)
 # Keep the default data/pablo.kb in source control but not the build copy
