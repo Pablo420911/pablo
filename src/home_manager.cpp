@@ -143,7 +143,7 @@ std::string HomeManager::getLightStatus(const std::string& room) const {
         std::string r = normalise(room);
         std::vector<std::string> rooms;
         for (auto& [k, v] : lights_) rooms.push_back(k);
-        std::string match = const_cast<HomeManager*>(this)->fuzzyMatch(r, rooms);
+        std::string match = fuzzyMatch(r, rooms);
         if (!match.empty()) {
             auto& v = lights_.at(match);
             oss << match << " light: "
@@ -239,7 +239,7 @@ std::string HomeManager::getLockStatus(const std::string& door) const {
         std::string d = normalise(door);
         std::vector<std::string> doors;
         for (auto& [k, v] : locks_) doors.push_back(k);
-        std::string match = const_cast<HomeManager*>(this)->fuzzyMatch(d, doors);
+        std::string match = fuzzyMatch(d, doors);
         if (!match.empty()) {
             oss << match << " is " << (locks_.at(match).locked ? "LOCKED" : "UNLOCKED") << ".";
         } else {
@@ -324,7 +324,7 @@ std::string HomeManager::getApplianceStatus(const std::string& name) const {
         std::string n = normalise(name);
         std::vector<std::string> apps;
         for (auto& [k, v] : appliances_) apps.push_back(k);
-        std::string match = const_cast<HomeManager*>(this)->fuzzyMatch(n, apps);
+        std::string match = fuzzyMatch(n, apps);
         if (!match.empty()) {
             oss << match << " is " << (appliances_.at(match).on ? "ON" : "OFF") << ".";
         } else {

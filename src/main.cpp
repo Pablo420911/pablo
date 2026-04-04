@@ -135,15 +135,15 @@ static bool stdinReady(int timeoutMs = 100) {
 
 static void printBanner(const AccessibilityManager& access) {
     if (access.isScreenReader()) {
-        std::cout << "\n=== Welcome to Pablo Home AI v1.1 ===\n";
+        std::cout << "\n=== Welcome to " << Pablo::version() << " ===\n";
         std::cout << "Your intelligent home assistant and companion.\n";
         std::cout << "Type help for commands. Type accessibility help for options.\n";
         std::cout << "Type quit to exit.\n\n";
     } else {
         std::cout << "\n";
         std::cout << "  ╔══════════════════════════════════════════════════╗\n";
-        std::cout << "  ║       Welcome to Pablo -- Home AI v1.1           ║\n";
-        std::cout << "  ║   Intelligent assistant for everyone             ║\n";
+        std::cout << "  ║   " << Pablo::version() << "   ║\n";
+        std::cout << "  ║      Intelligent assistant for everyone          ║\n";
         std::cout << "  ╚══════════════════════════════════════════════════╝\n";
         std::cout << "\n";
         std::cout << "  Type 'help' for commands.\n";

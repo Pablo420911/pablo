@@ -240,18 +240,25 @@ LearnResult LearningSystem::parseResponse(const std::string& input) {
         triggerEnd = sayPos2 + 5;
     }
 
+    std::size_t responseKeywordLen = 0; // length of the keyword that starts the response
+
     if (respondPos != std::string::npos && respondPos > triggerEnd) {
-        responseStart = respondPos + 9;
+        responseStart    = respondPos + 9; // strlen(" respond ") == 9
+        responseKeywordLen = 9;
     } else if (replyPos != std::string::npos && replyPos > triggerEnd) {
-        responseStart = replyPos + 7;
+        responseStart    = replyPos + 7;   // strlen(" reply ") == 7
+        responseKeywordLen = 7;
     } else if (answerPos != std::string::npos && answerPos > triggerEnd) {
-        responseStart = answerPos + 8;
+        responseStart    = answerPos + 8;  // strlen(" answer ") == 8
+        responseKeywordLen = 8;
     }
 
     if (triggerEnd != std::string::npos && responseStart != std::string::npos &&
         responseStart > triggerEnd) {
-        trigger  = normalise(input.substr(triggerEnd,
-                                          responseStart - 9 - triggerEnd));
+        // The trigger is between triggerEnd and (responseStart - responseKeywordLen).
+        // responseKeywordLen accounts for the separator keyword and its leading space.
+        std::size_t triggerLen = responseStart - responseKeywordLen - triggerEnd;
+        trigger  = normalise(input.substr(triggerEnd, triggerLen));
         response = normalise(input.substr(responseStart));
     }
 

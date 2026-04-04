@@ -256,9 +256,16 @@ std::string OccupantMonitor::checkScheduledDue() {
     for (auto& s : schedule_) {
         if (!s.doneToday && currentHHMM >= s.timeHHMM) {
             // Within 5 minutes of the scheduled time
-            int schedMin = std::stoi(s.timeHHMM.substr(0,2)) * 60 +
-                           std::stoi(s.timeHHMM.substr(3,2));
-            int nowMin   = tm->tm_hour * 60 + tm->tm_min;
+            int schedMin = 0;
+            try {
+                schedMin = std::stoi(s.timeHHMM.substr(0, 2)) * 60 +
+                           std::stoi(s.timeHHMM.substr(3, 2));
+            } catch (...) {
+                // Malformed schedule entry – skip it
+                s.doneToday = true; // prevent repeated errors today
+                continue;
+            }
+            int nowMin = tm->tm_hour * 60 + tm->tm_min;
             if (nowMin - schedMin >= 0 && nowMin - schedMin < 5) {
                 s.doneToday = true;
                 return "Scheduled " + s.label + " check-in: " + initiateCheckIn();
