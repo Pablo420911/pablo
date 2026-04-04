@@ -4,6 +4,7 @@
 #include "home_manager.h"
 #include "occupant_monitor.h"
 #include "learning_system.h"
+#include "accessibility.h"
 
 #include <string>
 #include <vector>
@@ -42,11 +43,12 @@ public:
     void save();
 
     // Accessor to subsystems (for direct control / testing)
-    HomeManager&     homeManager()     { return home_; }
-    OccupantMonitor& occupantMonitor() { return monitor_; }
-    LearningSystem&  learningSystem()  { return learner_; }
-    KnowledgeBase&   knowledgeBase()   { return kb_; }
-    NLPEngine&       nlpEngine()       { return nlp_; }
+    HomeManager&          homeManager()          { return home_; }
+    OccupantMonitor&      occupantMonitor()       { return monitor_; }
+    LearningSystem&       learningSystem()        { return learner_; }
+    KnowledgeBase&        knowledgeBase()         { return kb_; }
+    NLPEngine&            nlpEngine()             { return nlp_; }
+    AccessibilityManager& accessibilityManager()  { return access_; }
 
     // Conversation history (last N entries)
     std::vector<ConversationEntry> getHistory(std::size_t n = 20) const;
@@ -63,11 +65,12 @@ public:
     std::string tick();
 
 private:
-    KnowledgeBase   kb_;
-    NLPEngine       nlp_;
-    HomeManager     home_;
-    OccupantMonitor monitor_;
-    LearningSystem  learner_;
+    KnowledgeBase        kb_;
+    NLPEngine            nlp_;
+    HomeManager          home_;
+    OccupantMonitor      monitor_;
+    LearningSystem       learner_;
+    AccessibilityManager access_;
 
     std::string dataDir_;
     std::vector<ConversationEntry> history_;

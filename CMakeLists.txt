@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(Pablo VERSION 1.0 LANGUAGES CXX)
+project(Pablo VERSION 1.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,6 +12,9 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# Threads (required for autonomous background tick loop)
+find_package(Threads REQUIRED)
+
 # ---- Library (all modules except main) --------------------------------------
 set(PABLO_SOURCES
     src/knowledge_base.cpp
@@ -19,11 +22,13 @@ set(PABLO_SOURCES
     src/home_manager.cpp
     src/occupant_monitor.cpp
     src/learning_system.cpp
+    src/accessibility.cpp
     src/pablo.cpp
 )
 
 add_library(pablo_lib STATIC ${PABLO_SOURCES})
 target_include_directories(pablo_lib PUBLIC include)
+target_link_libraries(pablo_lib PUBLIC Threads::Threads)
 
 # ---- Executable -------------------------------------------------------------
 add_executable(pablo src/main.cpp)
@@ -59,3 +64,8 @@ add_test(NAME LearningSystem COMMAND test_learning)
 add_executable(test_pablo tests/test_pablo.cpp)
 target_link_libraries(test_pablo PRIVATE pablo_lib)
 add_test(NAME PabloIntegration COMMAND test_pablo)
+
+# Test: accessibility
+add_executable(test_accessibility tests/test_accessibility.cpp)
+target_link_libraries(test_accessibility PRIVATE pablo_lib)
+add_test(NAME Accessibility COMMAND test_accessibility)

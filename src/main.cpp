@@ -1,22 +1,41 @@
 #include "pablo.h"
+#include "accessibility.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <csignal>
 #include <cstdlib>
 #include <algorithm>
 #include <cctype>
+#include <atomic>
+#include <thread>
+#include <mutex>
+#include <queue>
+#include <chrono>
+#include <condition_variable>
 
-// ---- Global Pablo instance for signal handler ------------------------------
-static Pablo* g_pablo = nullptr;
+// POSIX select() for non-blocking stdin reads
+#include <sys/select.h>
+#include <unistd.h>
 
-static void signalHandler(int sig) {
-    std::cout << "\n\nPablo: Caught signal " << sig
-              << ". Saving knowledge base and exiting...\n";
-    if (g_pablo) g_pablo->save();
-    std::exit(0);
-}
+// ============================================================================
+// Globals / shared state
+// ============================================================================
 
-// ---- Utility ---------------------------------------------------------------
+static Pablo*    g_pablo    = nullptr;
+static std::atomic<bool> g_running{true};
+
+// Background messages from tick thread -> main thread
+static std::queue<std::string>   g_bgQueue;
+static std::mutex                g_bgMutex;
+static std::condition_variable   g_bgCv;
+
+// Mutex protecting all console output
+static std::mutex g_printMutex;
+
+// ============================================================================
+// Utilities
+// ============================================================================
 
 static std::string trim(const std::string& s) {
     auto b = s.find_first_not_of(" \t\r\n");
@@ -31,113 +50,316 @@ static std::string toLower(std::string s) {
     return s;
 }
 
-// ---- Banner ----------------------------------------------------------------
-
-static void printBanner() {
-    std::cout << "\n";
-    std::cout << "  ╔══════════════════════════════════════════════════╗\n";
-    std::cout << "  ║         Welcome to Pablo – Home AI v1.0          ║\n";
-    std::cout << "  ║   Your intelligent home assistant & companion     ║\n";
-    std::cout << "  ╚══════════════════════════════════════════════════╝\n";
-    std::cout << "\n";
-    std::cout << "  Type 'help' to see what I can do.\n";
-    std::cout << "  Type 'quit' or 'exit' to leave (I'll save everything).\n";
-    std::cout << "  Type 'history' to see the conversation history.\n";
-    std::cout << "\n";
+// Print an alert through the accessibility layer (thread-safe)
+static void pabloAlert(const std::string& text) {
+    std::lock_guard<std::mutex> lk(g_printMutex);
+    g_pablo->accessibilityManager().alert(text);
+    std::cout << "You: ";
+    std::cout.flush();
 }
 
-// ---- Main ------------------------------------------------------------------
+// ============================================================================
+// Signal handler
+// ============================================================================
+
+static void signalHandler(int /*sig*/) {
+    g_running = false;
+    g_bgCv.notify_all();
+}
+
+// ============================================================================
+// Background autonomous tick thread
+//
+// Runs every second, calling pablo.tick() for proactive check-ins / alerts.
+// Auto-saves the knowledge base every 5 minutes.
+// ============================================================================
+
+static void tickThread() {
+    auto nextSave = std::chrono::steady_clock::now() + std::chrono::minutes(5);
+
+    while (g_running.load()) {
+        {
+            std::unique_lock<std::mutex> lk(g_bgMutex);
+            g_bgCv.wait_for(lk, std::chrono::seconds(1),
+                            []{ return !g_running.load(); });
+        }
+        if (!g_running.load()) break;
+
+        std::string msg = g_pablo->tick();
+        if (!msg.empty()) {
+            std::lock_guard<std::mutex> lk(g_bgMutex);
+            g_bgQueue.push(msg);
+        }
+
+        auto now = std::chrono::steady_clock::now();
+        if (now >= nextSave) {
+            g_pablo->save();
+            nextSave = now + std::chrono::minutes(5);
+        }
+    }
+}
+
+// ============================================================================
+// Drain the background message queue (called from main thread)
+// ============================================================================
+
+static void drainBgQueue() {
+    std::queue<std::string> local;
+    {
+        std::lock_guard<std::mutex> lk(g_bgMutex);
+        std::swap(local, g_bgQueue);
+    }
+    while (!local.empty()) {
+        pabloAlert(local.front());
+        local.pop();
+    }
+}
+
+// ============================================================================
+// Non-blocking stdin check (returns true if data is ready to read)
+// ============================================================================
+
+static bool stdinReady(int timeoutMs = 100) {
+    fd_set fds;
+    FD_ZERO(&fds);
+    FD_SET(STDIN_FILENO, &fds);
+    struct timeval tv;
+    tv.tv_sec  = timeoutMs / 1000;
+    tv.tv_usec = (timeoutMs % 1000) * 1000;
+    return select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &tv) > 0;
+}
+
+// ============================================================================
+// Banner
+// ============================================================================
+
+static void printBanner(const AccessibilityManager& access) {
+    if (access.isScreenReader()) {
+        std::cout << "\n=== Welcome to Pablo Home AI v1.1 ===\n";
+        std::cout << "Your intelligent home assistant and companion.\n";
+        std::cout << "Type help for commands. Type accessibility help for options.\n";
+        std::cout << "Type quit to exit.\n\n";
+    } else {
+        std::cout << "\n";
+        std::cout << "  ╔══════════════════════════════════════════════════╗\n";
+        std::cout << "  ║       Welcome to Pablo -- Home AI v1.1           ║\n";
+        std::cout << "  ║   Intelligent assistant for everyone             ║\n";
+        std::cout << "  ╚══════════════════════════════════════════════════╝\n";
+        std::cout << "\n";
+        std::cout << "  Type 'help' for commands.\n";
+        std::cout << "  Type 'accessibility help' for accessibility options.\n";
+        std::cout << "  Type 'quit' or 'exit' to leave.\n";
+        std::cout << "\n";
+    }
+
+    if (access.getMode() != ACCESS_NONE) {
+        std::cout << "  Accessibility: " << access.describeMode() << "\n\n";
+    }
+}
+
+// ============================================================================
+// Parse CLI flags and configure accessibility mode
+// ============================================================================
+
+static void parseCLIFlags(int argc, char* argv[],
+                           std::string& dataDir,
+                           AccessibilityManager& access) {
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--voice" || arg == "-v") {
+            access.addMode(ACCESS_VOICE_OUT);
+        } else if (arg == "--blind") {
+            access.addMode(ACCESS_BLIND);
+        } else if (arg == "--deaf") {
+            access.addMode(ACCESS_DEAF);
+        } else if (arg == "--simplified" || arg == "--simple") {
+            access.addMode(ACCESS_SIMPLIFIED);
+        } else if (arg == "--screen-reader" || arg == "--braille") {
+            access.addMode(ACCESS_SCREEN_READER);
+        } else if (arg == "--deafblind" || arg == "--deaf-blind") {
+            access.addMode(static_cast<unsigned>(ACCESS_BLIND)        |
+                           static_cast<unsigned>(ACCESS_DEAF)         |
+                           static_cast<unsigned>(ACCESS_SCREEN_READER));
+        } else if (arg.size() > 7 && arg.substr(0, 7) == "--data=") {
+            dataDir = arg.substr(7);
+        } else if (!arg.empty() && arg[0] != '-') {
+            dataDir = arg;
+        }
+    }
+}
+
+// ============================================================================
+// Handle a built-in shell command
+// Returns true if the command was handled, false otherwise.
+// ============================================================================
+
+static bool handleBuiltin(const std::string& lower,
+                           const std::string& original,
+                           Pablo& pablo) {
+    auto& access = pablo.accessibilityManager();
+
+    // Accessibility commands take priority
+    if (access.parseCommand(lower) || access.parseCommand(original)) {
+        return true;
+    }
+
+    if (lower == "history") {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.banner("Conversation History");
+        access.info(pablo.getHistoryString(30));
+        access.banner("End");
+        return true;
+    }
+    if (lower == "save") {
+        pablo.save();
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.info("Knowledge base saved.");
+        return true;
+    }
+    if (lower == "home status" || lower == "full status") {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.info(pablo.homeManager().getFullStatus());
+        return true;
+    }
+    if (lower == "wellness" || lower == "wellness report") {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.info(pablo.occupantMonitor().getStatusReport());
+        return true;
+    }
+    if (lower == "knowledge" || lower == "knowledge base") {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.info(pablo.learningSystem().getLearningReport());
+        return true;
+    }
+    if (lower == "activity log") {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        access.banner("Activity Log (last 20 entries)");
+        access.info(pablo.occupantMonitor().getLogString(20));
+        access.banner("End");
+        return true;
+    }
+    return false;
+}
+
+// ============================================================================
+// Main
+// ============================================================================
 
 int main(int argc, char* argv[]) {
-    // Determine data directory
+    // ---- Parse CLI flags ----
     std::string dataDir = "data";
-    if (argc > 1) dataDir = argv[1];
+    AccessibilityManager cliAccess;
+    parseCLIFlags(argc, argv, dataDir, cliAccess);
 
-    // Set up Pablo
+    // ---- Set up Pablo ----
     Pablo pablo;
+    pablo.accessibilityManager().setMode(cliAccess.getMode());
     g_pablo = &pablo;
 
-    // Handle Ctrl+C and SIGTERM gracefully
     std::signal(SIGINT,  signalHandler);
     std::signal(SIGTERM, signalHandler);
 
     pablo.init(dataDir);
 
-    printBanner();
+    // ---- Banner ----
+    {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        printBanner(pablo.accessibilityManager());
+    }
 
-    // Initial greeting
-    std::cout << "Pablo: " << pablo.respond("hello") << "\n\n";
+    // ---- Initial greeting ----
+    {
+        std::string greeting = pablo.respond("hello");
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        pablo.accessibilityManager().output("Pablo", greeting);
+        std::cout << "\n";
+    }
+
+    // ---- TTS status ----
+    if (pablo.accessibilityManager().hasVoiceOut()) {
+        std::string engine = AccessibilityManager::detectTtsEngine();
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        if (engine.empty()) {
+            pablo.accessibilityManager().info(
+                "Note: Voice output requested but no TTS engine found.\n"
+                "      Install espeak-ng:  sudo apt install espeak-ng");
+        } else {
+            pablo.accessibilityManager().info(
+                "Voice output active using: " + engine);
+        }
+        std::cout << "\n";
+    }
+
+    // ---- Start background autonomous tick thread ----
+    std::thread ticker(tickThread);
 
     // ---- Main conversation loop ----
-    std::string line;
-    while (true) {
-        // Print prompt
+    {
+        std::lock_guard<std::mutex> lk(g_printMutex);
         std::cout << "You: ";
         std::cout.flush();
+    }
+
+    std::string line;
+
+    while (g_running.load()) {
+        // Drain any proactive background messages (alerts, check-ins)
+        drainBgQueue();
+
+        // Non-blocking check for input (100ms poll interval)
+        if (!stdinReady(100)) continue;
 
         if (!std::getline(std::cin, line)) {
-            // EOF (e.g. piped input ended)
+            // EOF
             break;
         }
 
         line = trim(line);
         if (line.empty()) {
-            // On empty input, run a tick to check for alerts
-            std::string alert = pablo.tick();
-            if (!alert.empty()) {
-                std::cout << "\nPablo: " << alert << "\n\n";
-            }
+            std::lock_guard<std::mutex> lk(g_printMutex);
+            std::cout << "You: ";
+            std::cout.flush();
             continue;
         }
 
-        // Special shell commands
         std::string lower = toLower(line);
+
+        // Exit
         if (lower == "quit" || lower == "exit" || lower == "q") {
-            std::cout << "Pablo: " << pablo.respond("goodbye") << "\n";
+            std::string bye = pablo.respond("goodbye");
+            std::lock_guard<std::mutex> lk(g_printMutex);
+            pablo.accessibilityManager().output("Pablo", bye);
+            std::cout << "\n";
             break;
         }
-        if (lower == "history") {
-            std::cout << "\n--- Conversation History ---\n";
-            std::cout << pablo.getHistoryString(30);
-            std::cout << "----------------------------\n\n";
-            continue;
-        }
-        if (lower == "save") {
-            pablo.save();
-            std::cout << "Pablo: Knowledge base saved.\n\n";
-            continue;
-        }
-        if (lower == "home status" || lower == "full status") {
-            std::cout << "\n" << pablo.homeManager().getFullStatus() << "\n";
-            continue;
-        }
-        if (lower == "wellness" || lower == "wellness report") {
-            std::cout << "\n" << pablo.occupantMonitor().getStatusReport() << "\n";
-            continue;
-        }
-        if (lower == "knowledge" || lower == "knowledge base") {
-            std::cout << "\n" << pablo.learningSystem().getLearningReport() << "\n";
-            continue;
-        }
-        if (lower == "activity log") {
-            std::cout << "\n--- Activity Log ---\n";
-            std::cout << pablo.occupantMonitor().getLogString(20);
-            std::cout << "--------------------\n\n";
+
+        // Built-in commands
+        if (handleBuiltin(lower, line, pablo)) {
+            std::lock_guard<std::mutex> lk(g_printMutex);
+            std::cout << "\nYou: ";
+            std::cout.flush();
             continue;
         }
 
-        // Run tick for background checks
-        std::string alert = pablo.tick();
-        if (!alert.empty()) {
-            std::cout << "\nPablo: " << alert << "\n";
-        }
-
-        // Get Pablo's response
+        // Process with Pablo AI
         std::string response = pablo.respond(line);
-        std::cout << "Pablo: " << response << "\n\n";
+        {
+            std::lock_guard<std::mutex> lk(g_printMutex);
+            pablo.accessibilityManager().output("Pablo", response);
+            std::cout << "\nYou: ";
+            std::cout.flush();
+        }
     }
 
+    // ---- Shutdown ----
+    g_running = false;
+    g_bgCv.notify_all();
+    if (ticker.joinable()) ticker.join();
+
     pablo.save();
-    std::cout << "\nPablo: Knowledge saved. Goodbye!\n";
+    {
+        std::lock_guard<std::mutex> lk(g_printMutex);
+        pablo.accessibilityManager().info("\nKnowledge saved. Goodbye!");
+    }
     return 0;
 }

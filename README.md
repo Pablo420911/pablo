@@ -1,9 +1,10 @@
 # Pablo – Home AI Assistant
 
 Pablo is a **C++ AI assistant** designed to help manage your home and keep
-you company. He can answer questions, control smart-home devices, learn new
-facts and preferences from you, monitor your wellbeing, and grow smarter the
-more you interact with him.
+you company. He runs fully autonomously in the background, proactively
+checking in on you and alerting you when needed. He speaks aloud via
+text-to-speech and supports users with visual, hearing, motor, or other
+impairments through a comprehensive accessibility system.
 
 ---
 
@@ -15,23 +16,70 @@ more you interact with him.
 | **Wellness Monitoring** | Scheduled check-ins (morning / midday / evening), wellness score, alert escalation if silent |
 | **Learning** | Remember facts, preferences, custom responses, schedules – all persisted across sessions |
 | **Question Answering** | Answers from its growing knowledge base, built-in time/date, home-device queries |
-| **Conversation** | Natural-language interface; teaches Pablo new responses so he gets smarter over time |
+| **Autonomous Operation** | Background tick thread – proactively checks in and alerts without waiting for user input; auto-saves every 5 minutes |
+| **Voice Output (TTS)** | Speaks responses aloud via espeak-ng / flite / festival / macOS `say` |
+| **Blind Mode** | Full verbal descriptions of all information; TTS is enabled automatically |
+| **Deaf Mode** | All alerts are visual; prominent text banners; no audio-only cues |
+| **DeafBlind Mode** | Screen-reader / Braille-display-friendly linear output; no decorative characters |
+| **Simplified Mode** | Short plain-language sentences; reduced jargon – suitable for less-abled users |
+
+---
+
+## Accessibility
+
+Pablo is designed to assist **everyone**, regardless of ability.
+
+### Command-line flags
+
+```bash
+./pablo --voice           # Enable text-to-speech output
+./pablo --blind           # Full blind-assistance mode (TTS + descriptions)
+./pablo --deaf            # Deaf-friendly visual mode (no audio-only cues)
+./pablo --simplified      # Simplified language mode
+./pablo --screen-reader   # Screen-reader / Braille-friendly mode
+./pablo --deafblind       # Combined deaf+blind (all three of the above)
+```
+
+### Runtime commands (type at any time)
+
+```
+set mode voice            – Toggle TTS on/off
+set mode blind            – Enable blind-assistance mode
+set mode deaf             – Enable deaf-friendly mode
+set mode simplified       – Enable simplified language
+set mode screen reader    – Enable screen-reader / Braille mode
+set mode deafblind        – Enable combined deaf+blind mode
+set mode normal           – Reset to standard text mode
+accessibility status      – Show active accessibility settings
+accessibility help        – Show full accessibility guide
+```
+
+### TTS setup
+
+Pablo auto-detects an installed engine in this priority order:
+`espeak-ng` → `espeak` → `flite` → `spd-say` → `festival` → macOS `say`
+
+```bash
+# Linux (recommended):
+sudo apt install espeak-ng
+
+# Alternative:
+sudo apt install flite
+
+# macOS: built-in 'say' requires no install
+```
 
 ---
 
 ## Building
 
-Requirements: **CMake ≥ 3.14** and a **C++17** compiler (GCC / Clang / MSVC).
+Requirements: **CMake ≥ 3.14**, **C++17** compiler, **pthreads** (standard on Linux/macOS).
 
 ```bash
-# From the repository root
 mkdir build && cd build
 cmake ..
 make -j4          # or: cmake --build .
 ```
-
-The `pablo` executable and a copy of the `data/` directory are placed in
-`build/`.
 
 ---
 
@@ -39,8 +87,12 @@ The `pablo` executable and a copy of the `data/` directory are placed in
 
 ```bash
 cd build
-./pablo           # uses ./data/ for the knowledge base
-./pablo /path/to/data   # custom data directory
+./pablo                   # standard text mode
+./pablo --voice           # voice output
+./pablo --blind           # blind-assistance mode
+./pablo --deaf            # deaf-friendly mode
+./pablo --deafblind       # combined deaf+blind
+./pablo --data=/my/dir    # custom data directory
 ```
 
 ### Example session
