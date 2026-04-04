@@ -1,6 +1,6 @@
 # Pablo
 
-**Pablo** — a dual-AI quantum mechanics teaching system and automated trading platform.
+**Pablo** — a dual-AI quantum mechanics teaching system, automated trading platform, and extensible AI agent factory.
 
 Two AI agents, **Professor Quantum** and **Curious Quantum**, hold a live
 back-and-forth conversation that teaches quantum mechanics to anyone reading along.
@@ -118,3 +118,97 @@ python trader.py --symbols AAPL --broker alpaca --live
 5. **Execution** — orders are placed via the chosen backend (paper simulation or Alpaca broker API) with bracket orders (stop-loss + take-profit) attached automatically.
 
 > ⚠️ **Disclaimer:** This software is for educational purposes only. Past performance does not guarantee future results. Never invest money you cannot afford to lose.
+
+---
+
+## AI Agent Factory — `agents.py`
+
+A dynamic registry that lets you **define, spawn, and run any number of focused AI agents** — each with its own persona, tools, and task loop.  Works in demo mode with no API key; pass `OPENAI_API_KEY` for live AI responses.
+
+### Built-in agents
+
+| Name | Role |
+|---|---|
+| `news_analyst` | Scans headlines, rates market impact (BULLISH/BEARISH/NEUTRAL) |
+| `earnings_summariser` | Extracts EPS beats/misses, guidance, and red flags from earnings reports |
+| `crypto_watcher` | Monitors crypto market regime, on-chain signals, and 30-day bias |
+| `portfolio_monitor` | Audits holdings for concentration risk and recommends rebalancing |
+| `sentiment_scanner` | Scores news/social/analyst/options sentiment -1.0 → +1.0 |
+| `options_flow` | Flags unusual options activity and infers smart-money positioning |
+| `quant_researcher` | Designs and critiques quantitative strategies with academic rigor |
+| `macro_economist` | Puts CPI/GDP/rate data in context and maps asset-class implications |
+
+### Quick commands
+
+```bash
+# List all available agents:
+python agents.py --list
+
+# Run a single agent (demo mode, no key needed):
+python agents.py --run news_analyst --input "Fed raises rates 25bp"
+
+# Run multiple agents in sequence:
+python agents.py --run news_analyst sentiment_scanner --input "Tesla misses deliveries"
+
+# Debate between two agents:
+python agents.py --debate news_analyst macro_economist --input "CPI hot at 3.4%"
+
+# Use live AI:
+export OPENAI_API_KEY="sk-..."
+python agents.py --run earnings_summariser --input "AAPL Q1 EPS $1.52 vs $1.40 est."
+```
+
+### Add your own agent
+
+**Option 1 — interactive wizard:**
+```bash
+python agents.py --define
+```
+
+**Option 2 — YAML spec file:**
+```yaml
+# my_agent.yaml
+name: my_agent
+display_name: My Custom Agent
+description: Does something very specific.
+tags: [custom, research]
+model: gpt-4o-mini
+temperature: 0.6
+max_tokens: 500
+system_prompt: |
+  You are My Custom Agent. When given input you will...
+demo_outputs:
+  - "This is what I would say in demo mode."
+```
+```bash
+python agents.py --spec my_agent.yaml --input "my question"
+```
+
+**Option 3 — Python API:**
+```python
+from agents import AgentFactory, AgentSpec
+
+factory = AgentFactory()
+factory.register(AgentSpec(
+    name="my_agent",
+    display_name="My Agent",
+    description="Does something focused.",
+    system_prompt="You are a specialist in...",
+    demo_outputs=["Demo response here."],
+    tags=["custom"],
+))
+factory.run("my_agent", input_text="...", api_key="sk-...")
+```
+
+### Agent options
+
+| Flag | Description |
+|---|---|
+| `--list` | Print all registered agents |
+| `--run AGENT [AGENT ...]` | Run one or more agents by name |
+| `--debate AGENT_A AGENT_B` | Two agents debate the input |
+| `--spec YAML_FILE` | Load and run a custom agent from YAML |
+| `--define` | Interactive wizard to create a new agent |
+| `--input TEXT` | Context/question to pass to the agent(s) |
+| `--rounds N` | Debate rounds (default: 2) |
+| `--model MODEL` | Override the OpenAI model for all agents |
