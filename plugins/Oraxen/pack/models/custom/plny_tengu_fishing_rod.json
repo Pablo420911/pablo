@@ -1,0 +1,17 @@
+{
+  "__comment": [
+    "Fishing rod model — CMD 10009.",
+    "The 'cast' predicate switches to plny_tengu_fishing_rod_cast",
+    "to show a different sprite when the rod is cast.",
+    "Textures needed:",
+    "  plny_tengu_fishing_rod.png      — rod in hand / uncast",
+    "  plny_tengu_fishing_rod_cast.png — rod while line is in water"
+  ],
+  "parent": "item/fishing_rod",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_fishing_rod"
+  },
+  "overrides": [
+    {"predicate": {"cast": 1}, "model": "custom/plny_tengu_fishing_rod_cast"}
+  ]
+}

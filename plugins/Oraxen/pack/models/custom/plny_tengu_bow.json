@@ -1,0 +1,23 @@
+{
+  "__comment": [
+    "Bow model — CMD 10007.",
+    "This file is loaded when the player holds the bow at CMD 10007.",
+    "The overrides below handle the three pull-charge stages.",
+    "Each pulling model inherits from this file's parent so they",
+    "share the same hand positioning.",
+    "Texture filenames for each stage:",
+    "  plny_tengu_bow.png          — idle / undrawn",
+    "  plny_tengu_bow_pulling_0.png — start of draw",
+    "  plny_tengu_bow_pulling_1.png — mid draw",
+    "  plny_tengu_bow_pulling_2.png — full draw"
+  ],
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_bow"
+  },
+  "overrides": [
+    {"predicate": {"pulling": 1},                        "model": "custom/plny_tengu_bow_pulling_0"},
+    {"predicate": {"pulling": 1, "pull": 0.65},          "model": "custom/plny_tengu_bow_pulling_1"},
+    {"predicate": {"pulling": 1, "pull": 0.9},           "model": "custom/plny_tengu_bow_pulling_2"}
+  ]
+}

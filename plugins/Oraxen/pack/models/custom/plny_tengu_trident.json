@@ -1,0 +1,16 @@
+{
+  "__comment": [
+    "Trident model — CMD 10012.",
+    "Uses item/handheld (flat sprite) so the custom texture is",
+    "visible in the inventory and hand without needing a full 3D",
+    "trident element array.  The base material is TRIDENT which",
+    "gives the throwing mechanic and riptide/loyalty enchants.",
+    "If you want a fully 3D trident, replace with an elements array",
+    "in Blockbench.  The item/trident parent is internal to Minecraft",
+    "and does not support external texture replacement cleanly."
+  ],
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_trident"
+  }
+}

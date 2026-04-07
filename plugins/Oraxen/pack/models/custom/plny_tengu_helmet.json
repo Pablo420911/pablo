@@ -1,0 +1,288 @@
+{
+  "__comment": [
+    "plny_tengu_helmet.json — Tengu War Helm with back-mounted wings.",
+    "",
+    "COORDINATE SYSTEM (0–16 unit grid, Minecraft item model space):",
+    "  +X = right,  +Y = up,  +Z = south / toward the back of the",
+    "  player when the item is displayed in the HEAD slot.",
+    "  Therefore elements at Z ≥ 13 appear on the player's back.",
+    "",
+    "TEXTURES:",
+    "  #helmet → plugins/Oraxen/pack/textures/custom/plny_tengu_set/plny_tengu_helmet.png",
+    "  #wings  → plugins/Oraxen/pack/textures/custom/plny_tengu_set/plny_tengu_wings.png",
+    "",
+    "DISPLAY TRANSFORM TUNING:",
+    "  The 'head' transform uses scale [1,1,1] as a starting point.",
+    "  If the helmet appears too large in-game, lower the scale, e.g.:",
+    "    scale: [0.625, 0.625, 0.625]",
+    "  Use Blockbench (File → Open / Load model) to preview and tweak.",
+    "",
+    "WINGS ORIENTATION:",
+    "  The wing elements (wing_spine, left_wing_*, right_wing_*) are",
+    "  positioned at Z = 13–16, directly behind the helmet body.",
+    "  When worn in the HEAD slot, high-Z in the model space aligns",
+    "  with the player's back, so the wings visually extend from the",
+    "  back/shoulders without needing a second equipped item or /hat."
+  ],
+  "textures": {
+    "helmet":   "custom/plny_tengu_set/plny_tengu_helmet",
+    "wings":    "custom/plny_tengu_set/plny_tengu_wings",
+    "particle": "custom/plny_tengu_set/plny_tengu_wings"
+  },
+  "elements": [
+
+    {
+      "name": "helmet_body",
+      "comment": "Main dome of the helmet — 12 wide × 8 tall × 12 deep",
+      "from": [2, 0, 2],
+      "to":   [14, 8, 14],
+      "faces": {
+        "north": {"uv": [0, 0, 12, 8],  "texture": "#helmet"},
+        "south": {"uv": [0, 0, 12, 8],  "texture": "#helmet"},
+        "east":  {"uv": [0, 0, 12, 8],  "texture": "#helmet"},
+        "west":  {"uv": [0, 0, 12, 8],  "texture": "#helmet"},
+        "up":    {"uv": [0, 0, 12, 12], "texture": "#helmet"},
+        "down":  {"uv": [0, 0, 12, 12], "texture": "#helmet", "cullface": "down"}
+      }
+    },
+
+    {
+      "name": "visor",
+      "comment": "Front face-plate / visor extending from the brow",
+      "from": [3, 4, 0],
+      "to":   [13, 8, 2],
+      "faces": {
+        "north": {"uv": [0, 8, 10, 12], "texture": "#helmet"},
+        "south": {"uv": [0, 8, 10, 12], "texture": "#helmet"},
+        "east":  {"uv": [0, 8, 2, 12],  "texture": "#helmet"},
+        "west":  {"uv": [0, 8, 2, 12],  "texture": "#helmet"},
+        "up":    {"uv": [0, 8, 10, 10], "texture": "#helmet"},
+        "down":  {"uv": [0, 8, 10, 10], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "left_cheek_guard",
+      "comment": "Left side cheek/jaw guard",
+      "from": [0, 1, 3],
+      "to":   [2, 7, 11],
+      "faces": {
+        "north": {"uv": [12, 0, 14, 6], "texture": "#helmet"},
+        "south": {"uv": [12, 0, 14, 6], "texture": "#helmet"},
+        "east":  {"uv": [12, 0, 20, 6], "texture": "#helmet"},
+        "west":  {"uv": [12, 0, 20, 6], "texture": "#helmet"},
+        "up":    {"uv": [12, 0, 14, 8], "texture": "#helmet"},
+        "down":  {"uv": [12, 0, 14, 8], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "right_cheek_guard",
+      "comment": "Right side cheek/jaw guard (mirror of left)",
+      "from": [14, 1, 3],
+      "to":   [16, 7, 11],
+      "faces": {
+        "north": {"uv": [12, 0, 14, 6], "texture": "#helmet"},
+        "south": {"uv": [12, 0, 14, 6], "texture": "#helmet"},
+        "east":  {"uv": [12, 0, 20, 6], "texture": "#helmet"},
+        "west":  {"uv": [12, 0, 20, 6], "texture": "#helmet"},
+        "up":    {"uv": [12, 0, 14, 8], "texture": "#helmet"},
+        "down":  {"uv": [12, 0, 14, 8], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "top_crest",
+      "comment": "Decorative crest running along the top centre",
+      "from": [5, 8, 4],
+      "to":   [11, 12, 10],
+      "faces": {
+        "north": {"uv": [0, 12, 6, 16], "texture": "#helmet"},
+        "south": {"uv": [0, 12, 6, 16], "texture": "#helmet"},
+        "east":  {"uv": [0, 12, 6, 16], "texture": "#helmet"},
+        "west":  {"uv": [0, 12, 6, 16], "texture": "#helmet"},
+        "up":    {"uv": [0, 12, 6, 16], "texture": "#helmet"},
+        "down":  {"uv": [0, 12, 6, 16], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "left_horn",
+      "comment": "Left curved horn — extends above and inward",
+      "from": [1, 8, 5],
+      "to":   [4, 14, 8],
+      "faces": {
+        "north": {"uv": [6, 12, 9, 16], "texture": "#helmet"},
+        "south": {"uv": [6, 12, 9, 16], "texture": "#helmet"},
+        "east":  {"uv": [6, 12, 9, 16], "texture": "#helmet"},
+        "west":  {"uv": [6, 12, 9, 16], "texture": "#helmet"},
+        "up":    {"uv": [6, 12, 9, 15], "texture": "#helmet"},
+        "down":  {"uv": [6, 12, 9, 15], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "right_horn",
+      "comment": "Right curved horn (mirror of left)",
+      "from": [12, 8, 5],
+      "to":   [15, 14, 8],
+      "faces": {
+        "north": {"uv": [9, 12, 12, 16], "texture": "#helmet"},
+        "south": {"uv": [9, 12, 12, 16], "texture": "#helmet"},
+        "east":  {"uv": [9, 12, 12, 16], "texture": "#helmet"},
+        "west":  {"uv": [9, 12, 12, 16], "texture": "#helmet"},
+        "up":    {"uv": [9, 12, 12, 15], "texture": "#helmet"},
+        "down":  {"uv": [9, 12, 12, 15], "texture": "#helmet"}
+      }
+    },
+
+    {
+      "name": "wing_spine",
+      "comment": "Central spine connecting wings to the back of the helmet. Z=13–16 = player back when worn.",
+      "from": [7, -6, 13],
+      "to":   [9, 8, 16],
+      "faces": {
+        "north": {"uv": [7, 0, 9, 14], "texture": "#wings"},
+        "south": {"uv": [7, 0, 9, 14], "texture": "#wings"},
+        "east":  {"uv": [7, 0, 10, 14], "texture": "#wings"},
+        "west":  {"uv": [7, 0, 10, 14], "texture": "#wings"},
+        "up":    {"uv": [7, 0, 9, 3],   "texture": "#wings"},
+        "down":  {"uv": [7, 0, 9, 3],   "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "left_wing_upper",
+      "comment": "Upper section of the left wing — fans upward and to the left",
+      "from": [0, 2, 13],
+      "to":   [7, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 2, 7, 8], "texture": "#wings"},
+        "south": {"uv": [0, 2, 7, 8], "texture": "#wings"},
+        "east":  {"uv": [0, 2, 3, 8], "texture": "#wings"},
+        "west":  {"uv": [0, 2, 3, 8], "texture": "#wings"},
+        "up":    {"uv": [0, 2, 7, 5], "texture": "#wings"},
+        "down":  {"uv": [0, 2, 7, 5], "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "left_wing_mid",
+      "comment": "Middle feather band of the left wing — extends further left",
+      "from": [-4, -2, 13],
+      "to":   [7, 2, 16],
+      "faces": {
+        "north": {"uv": [0, 8, 11, 12], "texture": "#wings"},
+        "south": {"uv": [0, 8, 11, 12], "texture": "#wings"},
+        "east":  {"uv": [0, 8, 3, 12],  "texture": "#wings"},
+        "west":  {"uv": [0, 8, 3, 12],  "texture": "#wings"},
+        "up":    {"uv": [0, 8, 11, 11], "texture": "#wings"},
+        "down":  {"uv": [0, 8, 11, 11], "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "left_wing_lower",
+      "comment": "Lower trailing feathers of the left wing — sweeps downward",
+      "from": [-2, -7, 13],
+      "to":   [7, -2, 16],
+      "faces": {
+        "north": {"uv": [0, 12, 9, 16], "texture": "#wings"},
+        "south": {"uv": [0, 12, 9, 16], "texture": "#wings"},
+        "east":  {"uv": [0, 12, 3, 16], "texture": "#wings"},
+        "west":  {"uv": [0, 12, 3, 16], "texture": "#wings"},
+        "up":    {"uv": [0, 12, 9, 15], "texture": "#wings"},
+        "down":  {"uv": [0, 12, 9, 15], "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "right_wing_upper",
+      "comment": "Upper section of the right wing (mirror of left_wing_upper)",
+      "from": [9, 2, 13],
+      "to":   [16, 8, 16],
+      "faces": {
+        "north": {"uv": [9, 2, 16, 8], "texture": "#wings"},
+        "south": {"uv": [9, 2, 16, 8], "texture": "#wings"},
+        "east":  {"uv": [9, 2, 12, 8], "texture": "#wings"},
+        "west":  {"uv": [9, 2, 12, 8], "texture": "#wings"},
+        "up":    {"uv": [9, 2, 16, 5], "texture": "#wings"},
+        "down":  {"uv": [9, 2, 16, 5], "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "right_wing_mid",
+      "comment": "Middle feather band of the right wing — extends further right",
+      "from": [9, -2, 13],
+      "to":   [20, 2, 16],
+      "faces": {
+        "north": {"uv": [5, 8, 16, 12], "texture": "#wings"},
+        "south": {"uv": [5, 8, 16, 12], "texture": "#wings"},
+        "east":  {"uv": [5, 8, 8, 12],  "texture": "#wings"},
+        "west":  {"uv": [5, 8, 8, 12],  "texture": "#wings"},
+        "up":    {"uv": [5, 8, 16, 11], "texture": "#wings"},
+        "down":  {"uv": [5, 8, 16, 11], "texture": "#wings"}
+      }
+    },
+
+    {
+      "name": "right_wing_lower",
+      "comment": "Lower trailing feathers of the right wing — sweeps downward",
+      "from": [9, -7, 13],
+      "to":   [18, -2, 16],
+      "faces": {
+        "north": {"uv": [7, 12, 16, 16], "texture": "#wings"},
+        "south": {"uv": [7, 12, 16, 16], "texture": "#wings"},
+        "east":  {"uv": [7, 12, 10, 16], "texture": "#wings"},
+        "west":  {"uv": [7, 12, 10, 16], "texture": "#wings"},
+        "up":    {"uv": [7, 12, 16, 15], "texture": "#wings"},
+        "down":  {"uv": [7, 12, 16, 15], "texture": "#wings"}
+      }
+    }
+
+  ],
+
+  "display": {
+    "thirdperson_righthand": {
+      "rotation":    [0, 90, 0],
+      "translation": [0, 4, 0.5],
+      "scale":       [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation":    [0, 90, 0],
+      "translation": [0, 4, 0.5],
+      "scale":       [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation":    [0, 45, 0],
+      "translation": [0, 3, 2],
+      "scale":       [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation":    [0, -45, 0],
+      "translation": [0, 3, 2],
+      "scale":       [0.4, 0.4, 0.4]
+    },
+    "gui": {
+      "rotation":    [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale":       [0.625, 0.625, 0.625]
+    },
+    "head": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale":       [1.0, 1.0, 1.0]
+    },
+    "ground": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale":       [0.25, 0.25, 0.25]
+    },
+    "fixed": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale":       [0.5, 0.5, 0.5]
+    }
+  }
+}

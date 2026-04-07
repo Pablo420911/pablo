@@ -1,0 +1,49 @@
+# ============================================================
+#  Plny Tengu Misc Items  –  Oraxen item definitions
+#  Naming prefix : plny_tengu_*
+#  CMD range     : 10017 – 10018
+#
+#  CRATE
+#  -----
+#  Uses PAPER as base (neutral, no vanilla behaviour).
+#  The 3D crate model (plny_tengu_crate.json) looks like a
+#  small stylised chest in the inventory and when held.
+#  If you want an actual openable crate mechanic, pair this
+#  with a Lootbox / CrateReloaded / EpicCrates plugin that
+#  accepts any material + CMD to identify the crate item.
+#
+#  KEY
+#  ---
+#  Also uses PAPER.  Replace the model with a flat key sprite
+#  or a 3D key model as desired.
+# ============================================================
+
+# ------------------------------------------------------------------
+# CRATE  (CMD 10017)
+# ------------------------------------------------------------------
+plny_tengu_crate:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Crate</gradient>"
+  material: PAPER
+  custom_model_data: 10017
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_crate
+  lore:
+    - "<gray>Contains the spoils of a tengu raid."
+    - ""
+    - "<gold>▶ Right-click to open"
+
+# ------------------------------------------------------------------
+# KEY  (CMD 10018)
+# ------------------------------------------------------------------
+plny_tengu_key:
+  displayname: "<gradient:#FF4500:#8B0000>Tengu Key</gradient>"
+  material: PAPER
+  custom_model_data: 10018
+  Pack:
+    generate_model: false
+    model: custom/plny_tengu_key
+  lore:
+    - "<gray>The key to untold power — or doom."
+    - ""
+    - "<gold>▶ Used to open the Tengu Crate"

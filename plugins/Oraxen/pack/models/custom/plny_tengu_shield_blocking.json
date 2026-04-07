@@ -1,0 +1,6 @@
+{
+  "parent": "item/shield",
+  "textures": {
+    "particle": "custom/plny_tengu_set/plny_tengu_shield"
+  }
+}

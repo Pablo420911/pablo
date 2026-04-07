@@ -1,0 +1,34 @@
+{
+  "__comment": [
+    "plny_tengu_key.json — flat 2-D key icon.",
+    "item/generated renders the texture as a flat sprite.",
+    "Texture: custom/plny_tengu_set/plny_tengu_key.png",
+    "A 16×16 or 32×32 pixel art of a key is ideal here."
+  ],
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_key"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 3, 1],
+      "scale":       [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 3, 2],
+      "scale":       [0.4, 0.4, 0.4]
+    },
+    "gui": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale":       [1.0, 1.0, 1.0]
+    },
+    "ground": {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 2, 0],
+      "scale":       [0.25, 0.25, 0.25]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_hoe"
+  }
+}

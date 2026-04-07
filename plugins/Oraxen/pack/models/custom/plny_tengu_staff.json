@@ -1,0 +1,7 @@
+{
+  "__comment": "Staff model — uses item/handheld for correct in-hand rotation. Base material is BLAZE_ROD.",
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "custom/plny_tengu_set/plny_tengu_staff"
+  }
+}
